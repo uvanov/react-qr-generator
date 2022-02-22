@@ -1,0 +1,16 @@
+{
+  "name": "qr-api-server",
+  "version": "1.0.0",
+  "description": "QR-Api Server Side Package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "uvanov",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3",
+    "qr-image": "^3.2.0"
+  }
+}
