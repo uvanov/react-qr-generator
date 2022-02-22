@@ -8,7 +8,7 @@ Application has own API, based on NodeJS. As a qr-library i chose [qr-image](htt
 
 The API has the following structure: 
 
-`localhost/qr/{params}`
+`localhost:5000/qr/{params}`
 
 | Parameter name | Parameter Description |
 | -------------- | --------------------- |
