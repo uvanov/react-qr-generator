@@ -1,15 +1,19 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const qrImage = require("qr-image");
 const fs = require("fs");
 
 const app = express();
 
+app.use(cors());
+
 app.get("/", (request, response) => {
    response.send({message: "Hello world!"});
 });
-
 app.get('/qr', (request, response) => {
+
+    console.log(`Got request.`);
 
     const codeUrl = request.query.url;
 
