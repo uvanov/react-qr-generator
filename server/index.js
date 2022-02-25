@@ -1,8 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const qrImage = require("qr-image");
 const fs = require("fs");
+const QRGenerator = require("./QRGenerator");
+const qrGenerator = new QRGenerator();
+
 
 const app = express();
 
@@ -11,9 +13,9 @@ app.use(cors());
 app.get("/", (request, response) => {
    response.send({message: "Hello world!"});
 });
+
 app.get('/qr', (request, response) => {
 
-    console.log(`Got request.`);
 
     const codeUrl = request.query.url;
 
@@ -23,13 +25,11 @@ app.get('/qr', (request, response) => {
         return;
     }
 
-    let qrCode = qrImage.image(codeUrl, { type: 'svg', size: 6 });
 
-    // qrCode.pipe(require('fs').createWriteStream('results/i_love_qr.svg'));
-    // If i need to store images
+    const pathToCode = qrGenerator.CreateCode(codeUrl, 6);
 
-    response.setHeader("Content-type", "image/svg");
-    qrCode.pipe(response);
+    response.send({path: pathToCode});
+    response.end();
 });
 
 app.listen(5000, () => {
