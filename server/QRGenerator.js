@@ -8,24 +8,24 @@ class QRGenerator {
         this.format = "svg";
     }
 
-    GenerateFilename(){
-        return ( Math.random() + 1 + Date.now() ).toString(36);
+    GenerateFilename() {
+        return (Math.random() + 1 + Date.now()).toString(36);
     }
 
-    SaveFile(QRCode){
+    SaveFile(QRCode) {
         const fileName = this.GenerateFilename();
-        const filePath = path.join(__dirname, "results", `${fileName}.${this.format}`);
+        const filePath = path.resolve("results", `${fileName}.${this.format}`);
 
-        QRCode.pipe( filesystem.createWriteStream(filePath) );
+        QRCode.pipe(filesystem.createWriteStream(filePath));
         return filePath;
     }
 
-   CreateCode( linkToUrl, codeSize ){
-        const code = qr.image(linkToUrl, {size: codeSize});
+    CreateCode(linkToUrl, codeSize = 5) {
+        const code = qr.image(linkToUrl, {type: this.format, size: codeSize});
         return this.SaveFile(code);
-   }
+    }
 
 
 }
 
-export default new QRGenerator();
+module.exports = QRGenerator;
